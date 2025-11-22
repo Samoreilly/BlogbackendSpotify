@@ -12,7 +12,7 @@ const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:3001/callback';
 
 // Step 1: Visit this URL to authorize
-app.get('/login', (req, res) => {
+app.get('/login', (_req, res) => {
   const scopes = [
     'user-read-currently-playing',
     'user-read-recently-played',

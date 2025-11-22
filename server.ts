@@ -52,7 +52,7 @@ async function getAccessToken() {
 // API Routes
 
 // Get currently playing track
-app.get('/api/now-playing', async (req, res) => {
+app.get('/api/now-playing', async (_req, res) => {
   try {
     const token = await getAccessToken();
     const response = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
