@@ -8,7 +8,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://sammeh.me', 'http://localhost:5173'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Spotify API credentials
@@ -169,6 +172,12 @@ app.get('/api/top-artists', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🎵 Spotify server running on http://localhost:${PORT}`);
-});
+// Only start server if not in serverless environment
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🎵 Spotify server running on http://localhost:${PORT}`);
+  });
+}
+
+// Export for Vercel serverless
+export default app;
